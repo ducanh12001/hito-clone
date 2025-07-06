@@ -1,10 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 import { Input, type InputProps } from '@/components/ui/input';
+import {
+  EyeClosedIcon,
+  EyeIcon,
+} from '@/features/user/components/icons/auth-icons';
 
 export interface PasswordInputProps extends Omit<InputProps, 'type'> {
   showToggle?: boolean;
@@ -28,13 +31,13 @@ const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
           <button
             type="button"
             onClick={togglePassword}
-            className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2 transition-colors"
+            className="text-foreground/50 hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2 transition-colors"
             tabIndex={-1}
           >
             {showPassword ? (
-              <EyeOff className="size-6" />
+              <EyeClosedIcon className="size-6" />
             ) : (
-              <Eye className="size-6" />
+              <EyeIcon className="size-6" />
             )}
             <span className="sr-only">
               {showPassword ? 'Hide password' : 'Show password'}
@@ -45,6 +48,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
     );
   },
 );
+
 PasswordInput.displayName = 'PasswordInput';
 
 export { PasswordInput };

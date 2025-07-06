@@ -1,5 +1,7 @@
 import { cn } from '@/lib/utils';
 
+import { Divider } from '@/components/ui/divider';
+
 interface DividerProps {
   children?: React.ReactNode;
   className?: string;
@@ -15,7 +17,7 @@ const TextDivider = ({
 }: DividerProps) => {
   return (
     <div className={cn('flex items-center', className)}>
-      <div className={cn('bg-border h-px flex-1', lineClassName)} />
+      <Divider className={cn('flex-1', lineClassName)} />
       {children && (
         <div
           className={cn(
@@ -26,7 +28,7 @@ const TextDivider = ({
           {children}
         </div>
       )}
-      <div className={cn('bg-border h-px flex-1', lineClassName)} />
+      <Divider className={cn('flex-1', lineClassName)} />
     </div>
   );
 };

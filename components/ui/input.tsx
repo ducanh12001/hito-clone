@@ -14,16 +14,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         type={type}
         data-slot="input"
         className={cn(
-          'bg-background flex h-9 w-full min-w-0 rounded-lg border px-3 py-2 text-base md:text-sm',
+          'bg-background border-input flex h-9 w-full min-w-0 rounded-lg border px-3 py-2 text-base md:text-sm',
           'file:text-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium',
           'placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground',
           'transition-[color,box-shadow,border-color] outline-none',
           'disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
-          'focus-visible:border-input focus-visible:shadow-focus-ring',
 
           error
-            ? 'border-destructive focus-visible:ring-destructive/20 focus-visible:border-destructive aria-invalid:ring-destructive/20 aria-invalid:border-destructive'
-            : 'border-input',
+            ? 'focus-visible:shadow-focus-ring-error bg-red-100'
+            : 'focus-visible:shadow-focus-ring',
 
           className,
         )}
@@ -33,6 +32,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     );
   },
 );
+
 Input.displayName = 'Input';
 
 export { Input };

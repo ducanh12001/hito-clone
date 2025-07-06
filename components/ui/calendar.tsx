@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import * as React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { DayPicker } from 'react-day-picker';
 import { ja } from 'date-fns/locale';
@@ -18,23 +18,23 @@ const Calendar = ({
     <DayPicker
       locale={ja}
       showOutsideDays={showOutsideDays}
-      className={cn('p-3', className)}
+      className={cn('w-full', className)}
       classNames={{
         months: 'flex flex-col gap-2',
         month: 'flex flex-col gap-4',
         caption: 'flex justify-center pt-1 relative items-center w-full',
-        caption_label: 'text-sm font-medium',
+        caption_label: 'text-base font-bold leading-7',
         nav: 'flex items-center gap-1',
         nav_button: cn(
           buttonVariants({ variant: 'outline' }),
-          'size-7 bg-transparent opacity-50 hover:opacity-100 rounded-full border border-input',
+          'border-input size-7 rounded-full border bg-transparent p-0 opacity-50 hover:opacity-100',
         ),
         nav_button_previous: 'absolute left-1',
         nav_button_next: 'absolute right-1',
         table: 'w-full border-collapse space-x-1',
         head_row: 'flex justify-center',
         head_cell:
-          'text-muted-foreground rounded-md w-8 font-medium text-[0.8rem]',
+          'text-muted-foreground rounded-md w-9 font-medium text-[0.8rem]',
         row: 'flex w-full mt-2 justify-center',
         cell: cn(
           'relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent [&:has([aria-selected].day-range-end)]:rounded-r-md',
@@ -44,7 +44,7 @@ const Calendar = ({
         ),
         day: cn(
           buttonVariants({ variant: 'ghost' }),
-          'size-8 p-0 font-inter font-normal text-sm aria-selected:opacity-100 hover:!rounded-xl',
+          'size-9 p-0 font-inter font-normal text-sm aria-selected:opacity-100 hover:!rounded-xl',
         ),
         day_range_start:
           'day-range-start aria-selected:bg-primary aria-selected:text-primary-foreground',
@@ -74,7 +74,6 @@ const Calendar = ({
             {...props}
           />
         ),
-        ...props.components,
       }}
       {...props}
     />

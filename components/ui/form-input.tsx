@@ -4,7 +4,7 @@ import React from 'react';
 
 import { cn } from '@/lib/utils';
 
-import { Input, type InputProps } from '@/components/ui/input';
+import { Input, InputProps } from '@/components/ui/input';
 import {
   PasswordInput,
   PasswordInputProps,
@@ -15,7 +15,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  useFormField,
 } from '@/components/ui/form';
+import { Badge } from './badge';
 
 export interface FormInputProps {
   label?: string;
@@ -25,10 +27,11 @@ export interface FormInputProps {
   inputClassName?: string;
   labelClassName?: string;
   showRequiredIcon?: boolean;
+  badge?: React.ReactNode;
 }
 
 interface TextInputProps extends FormInputProps {
-  type?: 'text' | 'email' | 'number' | 'tel' | 'url' | 'search';
+  type?: 'text' | 'email' | 'number' | 'tel' | 'url' | 'search' | 'date-picker';
   inputProps?: Omit<InputProps, 'type'>;
 }
 
@@ -44,16 +47,19 @@ const FormInputField = React.forwardRef<HTMLInputElement, FormInputFieldProps>(
     {
       label,
       description,
-      required,
+      required = false,
       className,
       inputClassName,
       labelClassName,
       type = 'text',
       inputProps,
       showRequiredIcon = false,
+      badge,
     },
     ref,
   ) => {
+    const { error } = useFormField();
+
     return (
       <FormItem className={className}>
         {label && (
@@ -62,22 +68,35 @@ const FormInputField = React.forwardRef<HTMLInputElement, FormInputFieldProps>(
           >
             {label}
             {showRequiredIcon && required && (
-              <span className="text-destructive ml-1">*</span>
+              <Badge className="text-destructive rounded-full bg-[#FEE8E7] px-2.5 py-[2px]">
+                必須
+              </Badge>
             )}
+            {badge}
           </FormLabel>
         )}
         <FormControl>
           {type === 'password' ? (
             <PasswordInput
               ref={ref}
-              className={cn('h-14 text-base', inputClassName)}
+              required={required}
+              error={!!error}
+              className={cn(
+                'h-14 text-base font-medium placeholder:font-normal',
+                inputClassName,
+              )}
               {...(inputProps as PasswordInputProps)}
             />
           ) : (
             <Input
               type={type}
               ref={ref}
-              className={cn('h-14 text-base', inputClassName)}
+              required={required}
+              error={!!error}
+              className={cn(
+                'h-14 text-base font-medium placeholder:font-normal',
+                inputClassName,
+              )}
               {...(inputProps as InputProps)}
             />
           )}
@@ -88,6 +107,7 @@ const FormInputField = React.forwardRef<HTMLInputElement, FormInputFieldProps>(
     );
   },
 );
+
 FormInputField.displayName = 'FormInputField';
 
 export { FormInputField };
